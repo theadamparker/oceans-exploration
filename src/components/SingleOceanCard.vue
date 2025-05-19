@@ -6,8 +6,8 @@ defineProps<{
 </script>
 <template>
   <div class="ocean-card">
-    <h2 class="ocean-card-heading">{{ heading }}</h2>
-    <p class="ocean-card-description">{{ description }}</p>
+    <h2 class="ocean-card__heading">{{ heading }}</h2>
+    <p class="ocean-card__description">{{ description }}</p>
   </div>
 </template>
 
@@ -20,23 +20,20 @@ defineProps<{
   width: 240px;
   height: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
 
-  &-heading {
-    color: #0077b6;
+  &__heading {
+    color: #1B2E49;
     margin-top: 0;
     margin-bottom: 1rem;
-    font-size: 1.8rem;
+    font-size: 44px;
+    font-weight: 900;
   }
 
-  &-description {
-    color: #333;
+  &__description {
+    color: #000;
     line-height: 1.5;
     margin: 0;
+    font-size: 16px;
   }
 }
 </style>
