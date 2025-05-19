@@ -1,3 +1,7 @@
+<script setup lang="ts">
+// Component for displaying the wave pattern
+</script>
+
 <template>
   <svg class="patternWave" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 964" fill="none">
   <rect width="1280" height="964" fill="url(#pattern0_5_384)"/>

@@ -1,5 +1,6 @@
-<script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import SingleOceanCard from './SingleOceanCard.vue'
 import PatternWave from './PatternWave.vue'
 import cardsOceanImage from '../assets/img/cards-ocean.jpg'
@@ -9,8 +10,10 @@ const oceanCardsBackgroundImage = cardsOceanImage
 // const patternWaveImage = PatternWaveImg
 
 // Create refs for the container and each card
-const containerRef = ref(null)
-const cardRefs = ref(Array(5).fill(null)) // Pre-initialize array with 5 null elements
+const containerRef = ref<HTMLElement | null>(null)
+// Type that can handle both DOM elements and Vue component instances
+type ElementOrComponentRef = Element | ComponentPublicInstance | null
+const cardRefs = ref<ElementOrComponentRef[]>(Array(5).fill(null)) // Pre-initialize array with 5 null elements
 
 // Background position states
 const backgroundPosition = ref('center center')
@@ -25,7 +28,7 @@ const focalPoints = [
 ]
 
 // Set up intersection observer to detect when cards are in view
-let observers = []
+let observers: IntersectionObserver[] = []
 
 onMounted(() => {
   // Wait a bit longer to ensure DOM is fully rendered and refs are available
@@ -39,7 +42,14 @@ onMounted(() => {
         return;
       }
 
-      console.log(`Setting up observer for card ${index}`, cardEl);
+      // We need to ensure we're working with a DOM element
+      const element = cardEl instanceof Element ? cardEl : (cardEl as ComponentPublicInstance).$el;
+      if (!(element instanceof Element)) {
+        console.log(`Card ${index} is not a DOM element`);
+        return;
+      }
+
+      console.log(`Setting up observer for card ${index}`, element);
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -64,7 +74,7 @@ onMounted(() => {
         }
       );
 
-      observer.observe(cardEl);
+      observer.observe(element);
       observers.push(observer);
     });
   }, 300); // Add a small delay to ensure DOM is ready

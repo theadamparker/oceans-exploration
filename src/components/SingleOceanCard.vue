@@ -1,15 +1,8 @@
-<script setup>
-const props = defineProps({
-  heading: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  }
-})
-
+<script setup lang="ts">
+defineProps<{
+  heading: string;
+  description: string;
+}>();
 </script>
 <template>
   <div class="ocean-card">
