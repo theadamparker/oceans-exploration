@@ -49,13 +49,25 @@ section {
   top: 60vh;
   z-index: 3;
 }
+@keyframes sail {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
 
 .sailboat {
   position: absolute;
-  top: 15vh;
+  bottom: 21vh;
   z-index: 1;
+  right: 0;
+  animation: sail 10s infinite linear;
+
   @include bp.devicebreak(medium) {
     height: 70vh;
+    animation-duration: 25s;
   }
   img {
     height: 100%;
