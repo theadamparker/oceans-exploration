@@ -287,7 +287,7 @@ h1.fontSize-m {
   text-align: left;
   padding: 2rem;
   margin-top: 0;
-  border-radius: 0 0 30px 30px;
+  border-radius: 30px;
   z-index: 2;
   position: relative;
   margin-left: 5%;
@@ -300,9 +300,12 @@ h1.fontSize-m {
 .card-wrapper {
   display: flex;
   justify-content: center;
-  min-height: 200px;
-  padding: 0 10vw 0 30vw;
+  padding: 0 15vw;
   transition: opacity 0.5s ease, transform 0.5s ease;
+
+  @include bp.devicebreak(medium) {
+    padding: 0 10vw 0 30vw;
+  }
 
   &.in-view {
     opacity: 1;
@@ -310,19 +313,27 @@ h1.fontSize-m {
   }
 
   &:nth-of-type(2) {
-    align-self: flex-start;
+    @include bp.devicebreak(medium) {
+      align-self: flex-start;
+    }
   }
 
   &:nth-of-type(3) {
-    align-self: flex-end;
+    @include bp.devicebreak(medium) {
+      align-self: flex-end;
+    }
   }
 
   &:nth-of-type(5) {
-    align-self: flex-start;
+    @include bp.devicebreak(medium) {
+      align-self: flex-start;
+    }
   }
 
   &:nth-of-type(6) {
-    align-self: flex-end;
+    @include bp.devicebreak(medium) {
+      align-self: flex-end;
+    }
   }
 }
 </style>

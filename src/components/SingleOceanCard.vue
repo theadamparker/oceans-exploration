@@ -17,26 +17,34 @@ defineProps<{
 .ocean-card {
   background-color: #f0f8ff;
   border-radius: 8px;
-  padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 240px;
-  height: 100%;
+  width: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 2rem 1.25rem;
 
-  @include bp.devicebreak(small) {
-    width: 100%;
-    padding: 1.25rem;
+  @include bp.devicebreak(medium) {
+    width: 240px;
+  }
+
+  @include bp.devicebreak(xlarge) {
+    width: 440px;
+    padding: 2rem;
+    border-radius: 20px;
   }
 
   &__heading {
     color: #1B2E49;
     margin-top: 0;
     margin-bottom: 1rem;
-    font-size: 44px;
+    font-size: 36px;
     font-weight: 900;
     
-    @include bp.devicebreak(small) {
-      font-size: 36px;
+    @include bp.devicebreak(medium) {
+      font-size: 44px;
+    }
+
+    @include bp.devicebreak(xlarge) {
+      font-size: 64px;
     }
   }
 
@@ -45,6 +53,10 @@ defineProps<{
     line-height: 1.5;
     margin: 0;
     font-size: 16px;
+
+    @include bp.devicebreak(xlarge) {
+      font-size: 20px;
+    }
   }
 }
 </style>
