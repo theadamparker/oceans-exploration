@@ -15,7 +15,9 @@
       </div>
       <div class="grid-x fish-wrap">
         <div class="fish">
-          <img src="../assets/img/sail-fish.png" alt="fish" />
+          <video autoplay loop muted playsinline>
+            <source src="../assets/img/fish.webm" type="video/webm">
+          </video>
         </div>
         <div class="small-12 large-8 large-offset-4 cell large-text">
           <p>This work cannot be done alone. We build diverse global, local, and Indigenous partnerships and promote
@@ -52,7 +54,7 @@ section {
 }
 
 .large-text {
-  margin-top: 200px;
+  margin-top: 120px;
 
   p {
     font-size: 35px;
@@ -74,7 +76,7 @@ section {
   pointer-events: none;
   @include bp.devicebreak(medium) {
     position: absolute;
-    margin-top: 200px;
+    margin-top: 380px;
     animation-duration: 10s;
   }
   
