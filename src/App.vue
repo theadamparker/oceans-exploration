@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import OceanCards from './components/OceanCards.vue';
 
 </script>

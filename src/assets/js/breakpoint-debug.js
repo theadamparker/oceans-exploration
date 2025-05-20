@@ -1,8 +1,13 @@
 // Breakpoint Debug Helper
 // This script adds a visual indicator of the current breakpoint during development
 
-(function() {
-  if (process.env.NODE_ENV !== 'development') return;
+/**
+ * Initialize the breakpoint debug display
+ * Creates a visual indicator showing the current viewport width and breakpoint
+ */
+export function initBreakpointDebug() {
+  // Skip in production mode
+  if (typeof import.meta === 'undefined' || !import.meta.env || !import.meta.env.DEV) return;
   
   // Create the indicator element
   const indicator = document.createElement('div');
@@ -43,4 +48,15 @@
   
   // Add to the DOM
   document.body.appendChild(indicator);
-})();
+}
+
+// Run when module is loaded if in development mode
+if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
+  // Only auto-initialize if in browser environment
+  if (typeof document !== 'undefined') {
+    initBreakpointDebug();
+  }
+}
+
+// Export for explicit usage
+export default initBreakpointDebug;
