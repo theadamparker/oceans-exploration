@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import type { ComponentPublicInstance } from 'vue'
 import SingleOceanCard from './SingleOceanCard.vue'
 import cardsOceanImage from '../assets/img/cards-ocean.jpg'
+import patternWave from '../assets/img/pattern-wave.png'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -20,6 +21,7 @@ function debounce<F extends (...args: any[]) => any>(fn: F, delay: number) {
 
 // Make the image accessible to the template
 const oceanCardsBackgroundImage = cardsOceanImage
+const patternWaveBackgroundImage = patternWave
 
 // Create refs for the container and each card
 const containerRef = ref<HTMLElement | null>(null)
@@ -171,7 +173,9 @@ const oceanCards = [
 ]
 </script>
 <template>
-  <div class="section--ocean-cards">
+  <div class="section--ocean-cards" :style="{
+      backgroundImage: `url(${patternWaveBackgroundImage})`
+    }">
     <!-- Fixed background container -->
     <div ref="containerRef" class="ocean-cards-background" :style="{
       backgroundImage: `url(${oceanCardsBackgroundImage})`,
@@ -199,7 +203,9 @@ const oceanCards = [
 }
 
 .section--ocean-cards {
-  background-color: white;
+  background-color: transparent;
+  background-attachment: fixed;
+  background-repeat: repeat;
   width: 100%;
   position: relative;
   padding: 8rem 0;
