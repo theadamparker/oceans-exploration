@@ -71,6 +71,7 @@ section {
   position: static;
   left: 0;
   animation: swim 5s infinite linear;
+  pointer-events: none;
   @include bp.devicebreak(medium) {
     position: absolute;
     margin-top: 200px;

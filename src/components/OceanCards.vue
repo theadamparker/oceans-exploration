@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { ComponentPublicInstance } from 'vue'
 import SingleOceanCard from './SingleOceanCard.vue'
-import cardsOceanImage from '../assets/img/cards-ocean.jpg'
+import cardsOceanImage from '../assets/img/collage-bg.jpg'
 import patternWave from '../assets/img/pattern-wave.png'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -217,7 +217,7 @@ const oceanCards = [
 
 .ocean-cards-background {
   padding: 0 2rem 2rem;
-  width: 80%;
+  width: 90%;
   border-radius: 40px;
   margin: 0 auto;
   background-image: v-bind(oceanBgUrl);
@@ -233,19 +233,9 @@ const oceanCards = [
   /* Position from top of viewport */
   z-index: 1;
   /* Ensure background stays behind content */
-}
-
-/* Responsive adjustments for the background image zoom */
-@include bp.devicebreak(medium) {
-  .ocean-cards-background {
-    background-size: 175%; /* Slightly more zoom on medium screens */
-  }
-}
-
-@include bp.devicebreak(small) {
-  .ocean-cards-background {
-    background-size: 200%; /* More zoom on smaller screens to keep details visible */
-    width: 90%; /* Slightly wider on mobile */
+  @include bp.devicebreak(medium) {
+    width: 80%;
+    background-size: 150%; /* Slightly more zoom on medium screens */
   }
 }
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SectionHero from './components/SectionHero.vue';
 import IntroOctopus from './components/IntroOctopus.vue';
 import SectionFisheries from './components/SectionFisheries.vue';
 import OceanCards from './components/OceanCards.vue';
@@ -8,6 +9,7 @@ import SectionTurningTide from './components/SectionTurningTide.vue';
 
 <template>
   <div>
+    <SectionHero />
     <IntroOctopus />
     <SectionFisheries />
     <OceanCards />
