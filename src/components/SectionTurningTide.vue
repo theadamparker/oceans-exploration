@@ -16,8 +16,8 @@
       <div class="grid-x fish-wrap">
         <div class="fish">
           <video autoplay loop muted playsinline>
+            <source src="../assets/img/fish-ios.mov" type='video/mp4; codecs="hvc1"'>
             <source src="../assets/img/fish.webm" type="video/webm">
-            <source src="../assets/img/fish-ios.mov" type="video/mp4">
           </video>
         </div>
         <div class="small-12 large-8 large-offset-4 cell large-text">
