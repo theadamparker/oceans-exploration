@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import IntroOctopus from './components/IntroOctopus.vue';
 import OceanCards from './components/OceanCards.vue';
 
 </script>
 
 <template>
   <div>
-    <div class="section section--before">This is a section before</div>
+    <IntroOctopus />
+    <!-- <div class="section section--before">This is a section before</div> -->
     <OceanCards />
     <div class="section section--after">This is a section after</div>
   </div>
