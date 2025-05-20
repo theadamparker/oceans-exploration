@@ -309,11 +309,6 @@ h1.fontSize-m {
     transform: scale(1);
   }
 
-  &:not(.in-view) {
-    opacity: 0.8;
-    transform: scale(0.95);
-  }
-
   &:nth-of-type(2) {
     align-self: flex-start;
   }
