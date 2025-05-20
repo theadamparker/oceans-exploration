@@ -2,6 +2,7 @@
   <section>
     <p>The <strong>health of oceans</strong> is deeply tied to the health of the planet and our economies—millions of people across the world depend on them <strong class="blue">for sustenance, security and livelihoods.</strong></p>
     <video autoplay loop muted playsinline class="video">
+      <source src="./../assets/img/octopus.mov" type='video/mp4; codecs="hvc1"'>
       <source src="./../assets/img/octopus.webm" type="video/webm">
       Your browser does not support the video tag.
     </video>
