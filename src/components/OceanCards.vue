@@ -9,6 +9,15 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
 
+// Utility function to debounce resize events
+function debounce<F extends (...args: any[]) => any>(fn: F, delay: number) {
+  let timeoutID: ReturnType<typeof setTimeout> | null = null;
+  return function(this: any, ...args: Parameters<F>) {
+    if (timeoutID) clearTimeout(timeoutID);
+    timeoutID = setTimeout(() => fn.apply(this, args), delay);
+  } as F;
+}
+
 // Make the image accessible to the template
 const oceanCardsBackgroundImage = cardsOceanImage
 
@@ -19,24 +28,70 @@ type ElementOrComponentRef = Element | ComponentPublicInstance | null
 const cardRefs = ref<ElementOrComponentRef[]>(Array(6).fill(null)) // Pre-initialize array with 6 null elements
 
 // Background position states
-const backgroundPosition = ref('916px 355px')  // Default state position
+const backgroundPosition = ref('50% 0%')  // Default state position (center-top), adjusted for zoom
 
-// Define focal points for each card as x/y pixel coordinates
+// Define focal points for each card as percentage values (x% y%) of the image dimensions
+// These are converted from the original pixel values to make them responsive
+// Adjusted for 1.5x zoom
 const focalPoints = [
-  '675px 980px',   // 1. 71% card
-  '1004px 949px',  // 2. CO2 card
-  '885px 1444px',  // 3. $2.3 billion card
-  '634px 1891px',  // 4. GDP card
-  '1016px 1967px', // 5. Oxygen card
-  '834px 2340px'   // 6. SDG 14 card
+  '0% 30%',   // 1. 71% card
+  '100% 29%',   // 2. CO2 card
+  '58% 57%',   // 3. $2.3 billion card
+  '20% 80%',   // 4. GDP card
+  '100% 85%',   // 5. Oxygen card
+  '55% 100%'    // 6. SDG 14 card
 ]
+
+// Handle window resize for responsive behavior - debounced to improve performance
+const handleResize = debounce(() => {
+  // Adjust background size based on screen width if needed
+  const backgroundElement = containerRef.value;
+  if (backgroundElement) {
+    // For smaller screens, we might want to adjust the zoom level
+    // Currently maintains 150% across all screen sizes
+    // If needed, we could implement responsive zooming here
+  }
+  
+  // Force ScrollTrigger to update
+  ScrollTrigger.refresh();
+}, 200);
 
 onMounted(() => {
   // No need for ScrollTrigger pinning since we're using position: sticky
   // We're only setting up triggers for card animations and background position changes
 
+  // Add resize event listener
+  window.addEventListener('resize', handleResize);
+  
+  // Create a ScrollTrigger that resets the background to default position when above all cards
+  ScrollTrigger.create({
+    trigger: '.section--ocean-cards', // Using section selector for a more reliable trigger
+    start: 'top top',     // Start at the very top of the section
+    end: 'top+=400 top',  // End after scrolling down 400px
+    onEnter: () => {
+      // When first entering the section, ensure we start with default position
+      backgroundPosition.value = '50% 0%';
+    },
+    onLeaveBack: () => {
+      // Reset to default position when scrolling back up above all cards
+      console.log('Scrolled above all cards, resetting background to default position');
+      backgroundPosition.value = '50% 0%';
+      
+      // Remove in-view class from all cards when returning to the top
+      cardRefs.value.forEach((cardEl) => {
+        if (!cardEl) return;
+        const element = cardEl instanceof Element ? cardEl : (cardEl as ComponentPublicInstance).$el;
+        if (!(element instanceof Element)) return;
+        element.classList.remove('in-view');
+      });
+    }
+  });
+  
   // Set up triggers for each card to update background position
   setTimeout(() => {
+    // Create markers (for debugging, remove in production)
+    // ScrollTrigger.config({ markers: true });
+    
     cardRefs.value.forEach((cardEl, index) => {
       if (!cardEl) return;
 
@@ -63,6 +118,16 @@ onMounted(() => {
           element.classList.add('in-view');
         },
         onLeaveBack: () => {
+          // Only reset position if we're at the first card and going back to top section
+          if (index === 0) {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            const topTriggerPoint = 300; // This should match the 'top top+=300' value from earlier trigger
+            
+            if (scrollPosition < topTriggerPoint) {
+              console.log('Leaving first card and going above, resetting to default position');
+              backgroundPosition.value = '50% 0%';
+            }
+          }
           element.classList.remove('in-view');
         },
       });
@@ -73,6 +138,9 @@ onMounted(() => {
 onUnmounted(() => {
   // Clean up ScrollTrigger instances
   ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+  
+  // Remove resize event listener
+  window.removeEventListener('resize', handleResize)
 })
 
 const oceanCards = [
@@ -129,7 +197,7 @@ const oceanCards = [
 }
 
 .section--ocean-cards {
-  background-color: transparent;
+  background-color: white;
   width: 100%;
   position: relative;
   padding: 8rem 0;
@@ -142,18 +210,32 @@ const oceanCards = [
   width: 80%;
   border-radius: 40px;
   margin: 0 auto;
-  background-size: cover;
-  background-position: center;
+  background-size: 150%; /* Zoomed in by 1.5x from cover */
+  background-position: center; /* Initial position */
   display: flex;
   flex-direction: column;
   height: 80dvh;
-  transition: background-position 1.5s ease-in-out;
+  transition: background-position 1.5s ease-in-out, background-size 1.5s ease-in-out; /* Add transition for size changes too */
   position: sticky;
   /* Use sticky positioning instead of ScrollTrigger for pinning */
   top: 10vh;
   /* Position from top of viewport */
   z-index: 1;
   /* Ensure background stays behind content */
+}
+
+/* Responsive adjustments for the background image zoom */
+@media (max-width: 1200px) {
+  .ocean-cards-background {
+    background-size: 175%; /* Slightly more zoom on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .ocean-cards-background {
+    background-size: 200%; /* More zoom on smaller screens to keep details visible */
+    width: 90%; /* Slightly wider on mobile */
+  }
 }
 
 .ocean-cards-content {
@@ -229,7 +311,7 @@ h1 {
   }
 
   &:nth-of-type(6) {
-    align-self: flex-end;
+    // align-self: flex-end;
   }
 }
 </style>
