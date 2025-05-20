@@ -1,8 +1,15 @@
+<script setup>
+import wavePatternWhite from '../assets/img/pattern-wave-white.png';
+
+// Make the image URL available to the style section via CSS custom property
+const wavePattern = `url(${wavePatternWhite})`;
+</script>
+
 <template>
   <section>
     <p>Marine fisheries provide 57 million jobs, and in least developed countries fish is the primary source of protein for more than half the population.</p>
   </section>
-  </template>
+</template>
 <style lang="scss" scoped>
   @use '../assets/scss/breakpoints' as bp;
 
@@ -14,6 +21,16 @@
     color: white;
     @include bp.devicebreak(medium) {
       padding: 50px 24px 100px;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 36px;
+      background-image: v-bind(wavePattern);
+      background-repeat: repeat-x;
     }
   }
 

@@ -19,9 +19,13 @@ function debounce<F extends (...args: any[]) => any>(fn: F, delay: number) {
   } as F;
 }
 
-// Make the image accessible to the template
+// Make the images accessible to the template and CSS
 const oceanCardsBackgroundImage = cardsOceanImage
 const patternWaveBackgroundImage = patternWave
+
+// Create CSS-compatible URL strings
+const oceanBgUrl = `url(${oceanCardsBackgroundImage})`
+const patternBgUrl = `url(${patternWaveBackgroundImage})`
 
 // Create refs for the container and each card
 const containerRef = ref<HTMLElement | null>(null)
@@ -173,12 +177,9 @@ const oceanCards = [
 ]
 </script>
 <template>
-  <div class="section--ocean-cards" :style="{
-      backgroundImage: `url(${patternWaveBackgroundImage})`
-    }">
+  <div class="section--ocean-cards">
     <!-- Fixed background container -->
     <div ref="containerRef" class="ocean-cards-background" :style="{
-      backgroundImage: `url(${oceanCardsBackgroundImage})`,
       backgroundPosition: backgroundPosition
     }">
     </div>
@@ -204,6 +205,7 @@ const oceanCards = [
 
 .section--ocean-cards {
   background-color: transparent;
+  background-image: v-bind(patternBgUrl);
   background-attachment: fixed;
   background-repeat: repeat;
   width: 100%;
@@ -218,6 +220,7 @@ const oceanCards = [
   width: 80%;
   border-radius: 40px;
   margin: 0 auto;
+  background-image: v-bind(oceanBgUrl);
   background-size: 150%; /* Zoomed in by 1.5x from cover */
   background-position: center; /* Initial position */
   display: flex;
@@ -324,7 +327,7 @@ h1.fontSize-m {
   }
 
   &:nth-of-type(6) {
-    // align-self: flex-end;
+    align-self: flex-end;
   }
 }
 </style>

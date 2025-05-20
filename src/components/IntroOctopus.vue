@@ -47,5 +47,6 @@ video {
   top: 0;
   left: 0;
   opacity: 0.5;
+  pointer-events: none;
 }
 </style>
