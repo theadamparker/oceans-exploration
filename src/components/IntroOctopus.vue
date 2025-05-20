@@ -27,11 +27,11 @@ p {
   max-width: 750px;
   @include bp.devicebreak(medium) {
     font-size: 40px;
-    margin-left: 12%;
-    margin-right: 12%;
+    
   }
   @include bp.devicebreak(large) {
     font-size: 48px;
+    margin: 0 8.33%;
   }
 }
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import IntroOctopus from './components/IntroOctopus.vue';
+import SectionFisheries from './components/SectionFisheries.vue';
 import OceanCards from './components/OceanCards.vue';
 
 </script>
@@ -7,7 +8,7 @@ import OceanCards from './components/OceanCards.vue';
 <template>
   <div>
     <IntroOctopus />
-    <!-- <div class="section section--before">This is a section before</div> -->
+    <SectionFisheries />
     <OceanCards />
     <div class="section section--after">This is a section after</div>
   </div>
