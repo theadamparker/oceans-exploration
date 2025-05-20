@@ -1,5 +1,32 @@
-# Vue 3 + TypeScript + Vite
+# Oceans Exploration
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A visual exploration of the world's oceans and their importance to our planet, developed with Vue 3, TypeScript, and Vite.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Development
+
+### Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+## Project Structure
+
+### SCSS Utilities
+
+This project uses SCSS for styling and includes utilities based on the UNDP design system:
+
+- **Breakpoints**: Responsive breakpoints based on the UNDP design system.
+  - See documentation in [`src/assets/scss/README.md`](./src/assets/scss/README.md)
+  - Import in your components: `@use '@/assets/scss/breakpoints' as bp;`
+
+### Components
+
+- **OceanCards**: Main component for the ocean cards with scrolling and focal point tracking
+- **SingleOceanCard**: Individual card component displaying ocean facts
+- **PatternWave**: SVG wave pattern component
+- **StyleGuide**: Utility component to visualize breakpoints and styling (toggle in App.vue)

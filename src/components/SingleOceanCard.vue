@@ -12,6 +12,8 @@ defineProps<{
 </template>
 
 <style lang="scss" scoped>
+@use '../assets/scss/breakpoints' as bp;
+
 .ocean-card {
   background-color: #f0f8ff;
   border-radius: 8px;
@@ -21,12 +23,21 @@ defineProps<{
   height: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
+  @include bp.devicebreak(small) {
+    width: 100%;
+    padding: 1.25rem;
+  }
+
   &__heading {
     color: #1B2E49;
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 44px;
     font-weight: 900;
+    
+    @include bp.devicebreak(small) {
+      font-size: 36px;
+    }
   }
 
   &__description {

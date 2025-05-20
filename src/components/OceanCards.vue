@@ -192,6 +192,8 @@ const oceanCards = [
 </template>
 
 <style lang="scss" scoped>
+@use '../assets/scss/breakpoints' as bp;
+
 * {
   box-sizing: border-box;
 }
@@ -225,13 +227,13 @@ const oceanCards = [
 }
 
 /* Responsive adjustments for the background image zoom */
-@media (max-width: 1200px) {
+@include bp.devicebreak(medium) {
   .ocean-cards-background {
     background-size: 175%; /* Slightly more zoom on medium screens */
   }
 }
 
-@media (max-width: 768px) {
+@include bp.devicebreak(small) {
   .ocean-cards-background {
     background-size: 200%; /* More zoom on smaller screens to keep details visible */
     width: 90%; /* Slightly wider on mobile */
@@ -264,11 +266,12 @@ const oceanCards = [
   /* Re-enable pointer events for cards */
 }
 
-h1 {
+h1.fontSize-m {
+  font-size: 24px;
   text-align: center;
   color: #03045e;
   margin-bottom: 2rem;
-  width: 340px;
+  width: 260px;
   background: #1B2E49;
   color: white;
   line-height: 1;
@@ -279,6 +282,10 @@ h1 {
   z-index: 2;
   position: relative;
   margin-left: 5%;
+  @include bp.devicebreak(medium) {
+    font-size: 42px;
+    width: 340px;
+  }
 }
 
 .card-wrapper {

@@ -1,0 +1,8 @@
+/* 
+ * Main SCSS file for global styles and utilities
+ * Import this file in components where you need access to global styles
+ */
+
+@forward 'breakpoints';
+
+// Add more global styles or utilities here as needed

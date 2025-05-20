@@ -1,5 +1,14 @@
 @import url('https://cdn.jsdelivr.net/npm/@undp/design-system-assets/css/base-minimal.min.css');
 
+/* 
+ * Global CSS Variables and Defaults
+ * 
+ * For SCSS utilities including breakpoints, import from:
+ * @use '@/assets/scss/breakpoints' as bp;
+ * 
+ * See documentation in src/assets/scss/README.md
+ */
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -25,8 +34,4 @@ body {
 #app {
   width: 100%;
   min-height: 100vh;
-}
-
-h1.fontSize-m {
-  font-size: 42px;
 }

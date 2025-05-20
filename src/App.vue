@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import OceanCards from './components/OceanCards.vue';
 
-import OceanCards from './components/OceanCards.vue'
 </script>
 
 <template>
@@ -12,15 +13,19 @@ import OceanCards from './components/OceanCards.vue'
 </template>
 
 <style scoped lang="scss">
+@use './assets/scss/breakpoints' as bp;
+
 .section {
   min-height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+
   &--before {
     background-color: #1B2E49;
   }
+
   &--after {
     background-color: #1B2E49;
   }

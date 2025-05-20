@@ -1,0 +1,66 @@
+@mixin devicebreak($point) {
+  @if $point==small {
+    /* small design - mobile */
+    @media (max-width: 47.9375em) { // 767px
+      @content;
+    }
+  }
+  @else if $point==mediumonlytab {
+    /* medium design tab */
+    @media (max-width: 63.9375em) { // 1023px
+      @content;
+    }
+  }
+  @else if $point==medium {
+    /* medium design - tablet and up */
+    @media (min-width: 48em) { // 768px
+      @content;
+    }
+  }
+  @else if $point==large {
+    /* large design - desktop */
+    @media (min-width: 64em) { // 1024px
+      @content;
+    }
+  }
+  @else if $point==xlarge {
+    /* xlarge design */
+    @media (min-width: 90em) { // 1440px
+      @content;
+    }
+  }
+}
+
+// Container Query variants
+@mixin container($point, $name: '') {
+  @if $point ==small {
+    /* small design */
+    @container #{$name} (max-width: 47.9375em) {
+      @content;
+    }
+  }
+  @else if $point ==mediumonlytab {
+    /* medium design tab */
+    @container #{$name} (max-width: 63.9375em) {
+      @content;
+    }
+  }
+  @else if $point ==medium {
+    /* medium design */
+    @container #{$name} (min-width: 48em) {
+      @content;
+    }
+  }
+  @else if $point ==large {
+    /* large design */
+    @container #{$name} (min-width: 64em) {
+      @content;
+    }
+  }
+  @else if $point ==xlarge {
+    /* xlarge design */
+    @container #{$name} (min-width: 90em) {
+      @content;
+    }
+  }
+}
