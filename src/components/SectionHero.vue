@@ -7,7 +7,7 @@
     <div class="sailboat">
       <img src="../assets/img/sailing.webp" alt="">
     </div>
-    <img src="../assets/img/hero-wave.png" alt="" class="wave">
+    <img src="../assets/img/water-gradient.webp" alt="" class="wave">
   </section>
 </template>
 <style lang="scss" scoped>
@@ -48,6 +48,7 @@ section {
   position: absolute;
   top: 60vh;
   z-index: 3;
+  background-image: linear-gradient(180deg, #1b2e4900 48%, #1b2e49a5 50%, #1B2E49 90%);
 }
 @keyframes sail {
   0% {
