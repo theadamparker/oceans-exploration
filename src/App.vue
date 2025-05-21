@@ -3,7 +3,10 @@ import SectionHero from './components/SectionHero.vue';
 import IntroOctopus from './components/IntroOctopus.vue';
 import SectionFisheries from './components/SectionFisheries.vue';
 import OceanCards from './components/OceanCards.vue';
+import SectionFacts from './components/SectionFacts.vue';
+import SectionGuidingOceans from './components/SectionGuidingOceans.vue';
 import SectionTurningTide from './components/SectionTurningTide.vue';
+import SectionMeetingChallenges from './components/SectionMeetingChallenges.vue';
 
 </script>
 
@@ -13,7 +16,10 @@ import SectionTurningTide from './components/SectionTurningTide.vue';
     <IntroOctopus />
     <SectionFisheries />
     <OceanCards />
+    <SectionFacts />
+    <SectionGuidingOceans />
     <SectionTurningTide />
+    <SectionMeetingChallenges />
   </div>
 </template>
 

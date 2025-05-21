@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference path="./assets/js/undp-viewport.d.ts" />
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'

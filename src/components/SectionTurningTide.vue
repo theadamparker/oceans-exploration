@@ -3,7 +3,7 @@
     <div class="grid-container">
       <div class="grid-x">
         <div class="small-12 large-8 cell">
-          <h3>Turning the tide</h3>
+          <h2 class="h3">Turning the tide</h2>
           <p>UNDP is committed to raising awareness of the ocean’s crucial role in maintaining ecosystem health and
             supporting blue and green economies. We focus on governance, financing, innovation, and we advocate for
             global

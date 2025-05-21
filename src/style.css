@@ -1,4 +1,5 @@
 @import url('https://cdn.jsdelivr.net/npm/@undp/design-system-assets/css/base-minimal.min.css');
+@import url('https://cdn.jsdelivr.net/npm/@undp/design-system/docs/css/components/image-caption.min.css');
 
 /* 
  * Global CSS Variables and Defaults
@@ -34,4 +35,37 @@ body {
 #app {
   width: 100%;
   min-height: 100vh;
+}
+
+.h3 {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.142;
+}
+
+@media (min-width: 64em) {
+  .h3 {
+    font-size: 35px;
+  }
+}
+
+.h5 {
+  font-size: 20px;
+  line-height: 1.142;
+}
+
+@media (min-width: 64em) {
+  .h5 {
+    font-size: 25px;
+  }
+}
+
+.grid-margin-x {
+  gap: 12px;
+}
+
+@media (min-width: 64em) {
+  .grid-margin-x {
+    gap: 24px;
+  }
 }
