@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="grid-container">
-      <h2>The facts at sea<br>Plastics</h2>
+      <h2 class="h3">The facts at sea<br><span class="emphasize">Plastics</span></h2>
       <div class="grid-x grid-margin-x">
         <div class="small-12 medium-4">
           <img src="../assets/img/card-1-en.webp" alt="">
@@ -34,5 +34,20 @@ section {
   @include bp.devicebreak(medium) {
     padding: 300px 24px;
   }
+}
+
+.emphasize {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 3.125rem;
+  letter-spacing: 0.28125rem;
+}
+
+h2 {
+  margin-bottom: 2rem;
+}
+
+img {
+  margin-bottom: 2rem;
 }
 </style>
