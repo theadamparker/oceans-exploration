@@ -48,6 +48,7 @@ section {
   margin: 0;
   position: relative;
   color: white;
+  overflow: hidden;
 
   @include bp.devicebreak(medium) {
     padding: 300px 24px;
