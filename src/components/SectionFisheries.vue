@@ -33,10 +33,11 @@ const wavePattern = `url(${wavePatternWhite})`;
           <p>Drowning in plastic, suffering from destructive overfishing, one of our most precious natural resources could soon be on life support, with devastating consequences.</p>
         </div>
       </div>
-      
     </div>
-
-
+    <div class="coralWrap">
+      <img class="left" src="../assets/img/red-coral.webp" alt="">
+      <img class="right" src="../assets/img/algae1.webp" alt="">
+    </div>
   </section>
 </template>
 <style lang="scss" scoped>
@@ -79,6 +80,35 @@ figcaption {
   }
   .credits {
     color: white;
+  }
+}
+
+.coralWrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+
+  img {
+    width: 160px;
+    @include bp.devicebreak(medium) {
+      width: 300px;
+    }
+    @include bp.devicebreak(xlarge) {
+      width: 500px;
+    }
+  }
+
+  .left {
+    transform: translate(-30%, 30%);
+  }
+
+  .right {
+    transform: translate(30%, 30%);
   }
 }
 </style>
