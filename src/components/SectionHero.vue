@@ -60,18 +60,20 @@ section {
 
 .sailboat {
   position: absolute;
-  bottom: 21vh;
+  height: 70vh;
+  bottom: 19vh;
   z-index: 1;
   right: 0;
   animation: sail 10s infinite linear;
 
   @include bp.devicebreak(medium) {
-    height: 70vh;
     animation-duration: 25s;
+    bottom: 21vh;
   }
   img {
     height: 100%;
     width: auto;
+    max-width: none;
   }
 }
 </style>
