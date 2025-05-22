@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="titleWrap">
-      <h1 class="title">{{ t('hero.title') }}</h1>
+      <h1 class="title" v-html="t('hero.title')"></h1>
       <p class="subtitle">{{ t('hero.subtitle') }}</p>
     </div>
     <div class="sailboat">

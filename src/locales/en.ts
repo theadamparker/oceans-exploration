@@ -13,7 +13,7 @@ export default {
     french: 'Français'
   },
   hero: {
-    title: 'Turning the Tide',
+    title: 'Turning <br>the Tide',
     subtitle: 'For Ocean Health & Sustainability'
   },
   sections: {
