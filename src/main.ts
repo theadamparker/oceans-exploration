@@ -1,5 +1,5 @@
 // src/main.ts
-import { createApp } from 'vue'
+import { createApp as _createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import router from './router'
@@ -7,12 +7,9 @@ import i18n from './i18n'
 // Import the UNDP design system utilities with viewport function
 import { initViewport } from './assets/js/undp-design-system.js'
 
-// Check if we're in SSG mode
-const isSSG = import.meta.env.SSR || import.meta.env.SSG;
-
 // For SSG export, this function is used by vite-ssg
-export const createApp = (SSGContext) => {
-  const app = createApp(App);
+export function createApp(_SSGContext?: any) {
+  const app = _createApp(App);
   app.use(router);
   app.use(i18n);
   
@@ -40,7 +37,7 @@ export const createApp = (SSGContext) => {
   }
   
   return { app, router };
-};
+}
 
 // Only run in browser
 if (!import.meta.env.SSR && !import.meta.env.SSG && typeof window !== 'undefined') {
@@ -56,9 +53,7 @@ if (!import.meta.env.SSR && !import.meta.env.SSG && typeof window !== 'undefined
   }
 
   // Standard non-SSG initialization
-  const app = createApp(App);
-  app.use(router);
-  app.use(i18n);
+  const { app } = createApp();
   app.mount('#app');
 
   // Initialize the viewport script after app is mounted
@@ -69,15 +64,5 @@ if (!import.meta.env.SSR && !import.meta.env.SSG && typeof window !== 'undefined
         threshold: 0.2
       });
     }, 100);
-  });
-
-  // Re-initialize viewport detection on route change
-  router.afterEach(() => {
-    setTimeout(() => {
-      initViewport({
-        once: false,
-        threshold: 0.2
-      });
-    }, 200);
   });
 }

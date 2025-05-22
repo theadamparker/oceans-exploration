@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { watch, onMounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head';
 
 const { locale, t } = useI18n();
-const route = useRoute();
 
 // Function to update the HTML lang attribute
 const updateHtmlLang = (lang: string) => {
