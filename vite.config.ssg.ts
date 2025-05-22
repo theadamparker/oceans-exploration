@@ -19,7 +19,7 @@ const routes = [
 // This configuration is used to generate static site with pre-rendering
 export default defineConfig({
   plugins: [vue()],
-  base: process.env.BASE_URL || '/',
+  base: process.env.BASE_URL || (process.env.GITHUB_REPO ? `/${process.env.GITHUB_REPO.split('/')[1]}/` : '/'),
   build: {
     outDir: 'dist',
     emptyOutDir: true,

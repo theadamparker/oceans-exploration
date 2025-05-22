@@ -57,8 +57,13 @@ const routes = [
   }
 ];
 
+// Determine base URL for the router
+// This ensures it works in both development and production (GitHub Pages)
+let baseUrl = import.meta.env.BASE_URL || '/';
+console.log(`Router initialized with base URL: ${baseUrl}`);
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL), // BASE_URL from Vite config
+  history: createWebHistory(baseUrl), // Use the determined base URL
   routes,
   scrollBehavior(_to, _from, savedPosition) {
     if (savedPosition) {

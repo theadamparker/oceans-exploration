@@ -7,11 +7,23 @@ import i18n from './i18n'
 // Import the UNDP design system utilities with viewport function
 import { initViewport } from './assets/js/undp-design-system.js'
 
+// Get the base URL from Vite environment variables
+const baseUrl = import.meta.env.BASE_URL || '/';
+console.log(`Application initializing with BASE_URL: ${baseUrl}`);
+
+// Expose baseUrl to the window object for potential use in other scripts
+if (typeof window !== 'undefined') {
+  window.__APP_BASE_URL__ = baseUrl;
+}
+
 // For SSG export, this function is used by vite-ssg
 export function createApp(_SSGContext?: any) {
   const app = _createApp(App);
   app.use(router);
   app.use(i18n);
+  
+  // Add base URL as a global property
+  app.config.globalProperties.$baseUrl = baseUrl;
   
   // If in browser (not SSR), initialize viewport detection
   if (!import.meta.env.SSR && typeof window !== 'undefined') {

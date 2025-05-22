@@ -29,4 +29,10 @@ jobs:
         run: npm run build:static
       
       - name: Test static GitHub Pages build
-        run: npm run build:static:github
+        run: |
+          # Extract the repository owner and name from GITHUB_REPOSITORY
+          GITHUB_OWNER=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1)
+          GITHUB_REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)
+          
+          # Run the build with repository information
+          BASE_URL=/$GITHUB_REPO_NAME/ GITHUB_OWNER=$GITHUB_OWNER GITHUB_REPO_NAME=$GITHUB_REPO_NAME npm run build:static:github

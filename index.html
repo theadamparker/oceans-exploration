@@ -5,6 +5,30 @@
     <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UNDP Oceans Exploration</title>
+    
+    <!-- GitHub Pages SPA URL handling -->
+    <script>
+      // Handle redirects from 404.html page
+      (function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var redirectPath = urlParams.get('p');
+        
+        if (redirectPath) {
+          // Replace the URL without the query parameter but retain the path from the parameter
+          var basePathSegments = window.location.pathname.split('/');
+          var basePath = '';
+          
+          // On GitHub Pages, we need to include the repo name in the base path
+          if (window.location.hostname.includes('github.io')) {
+            basePath = '/' + basePathSegments[1]; // e.g., '/turning-the-tide'
+          }
+          
+          // Use replaceState to update the URL without causing a page reload
+          window.history.replaceState(null, null, basePath + redirectPath + window.location.hash);
+        }
+      })();
+    </script>
+    
     <!-- jQuery must be loaded first for UNDP Design System -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   </head>

@@ -4,6 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting - UNDP Oceans Exploration</title>
+  
+  <!-- GitHub Pages SPA redirect script -->
+  <script>
+    (function() {
+      // Single Page Apps for GitHub Pages
+      // Handles routing for apps hosted on GitHub Pages with a custom domain or base path
+      
+      // Get the base path from the URL (e.g., '/turning-the-tide')
+      var basePathSegments = window.location.pathname.split('/');
+      var basePath = '/' + (basePathSegments[1] || '');
+      
+      // If we're on a GitHub Pages site (username.github.io)
+      if (window.location.hostname.includes('github.io')) {
+        basePath = '/' + basePathSegments[1]; // e.g., '/turning-the-tide'
+      }
+      
+      // Save the URL hash
+      var hash = window.location.hash;
+      var pathWithoutBase = window.location.pathname.replace(basePath, '');
+      if (pathWithoutBase === '' || pathWithoutBase === '/') {
+        // We're at the project root
+        window.location.href = basePath + '/' + hash;
+      } else {
+        // We need to redirect to index.html with a proper URL
+        var newPath = basePath + '/index.html?p=' + encodeURIComponent(pathWithoutBase) + hash;
+        console.log('Redirecting to:', newPath);
+        window.location.href = newPath;
+      }
+    })();
+  </script>
+  
   <style>
     body {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;

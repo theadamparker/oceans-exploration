@@ -30,21 +30,33 @@ const pageDescription = computed(() => {
 });
 
 const canonicalUrl = computed(() => {
-  // Use environment variable BASE_URL to derive the correct base path
-  const baseUrl = import.meta.env.PROD 
-    ? `https://${import.meta.env.BASE_URL ? import.meta.env.BASE_URL.substring(1).replace(/\/$/, '') : 'yourusername.github.io/turning-the-tide'}` 
+  // Get the GitHub username or organization name
+  const getGitHubOwner = () => {
+    // Default if we can't detect
+    return 'theadamparker';
+  };
+
+  // Domain and path components
+  const domain = import.meta.env.PROD 
+    ? `https://${getGitHubOwner()}.github.io` 
     : 'http://localhost:5173';
   
-  let path = '';
+  // Base path from env, correctly handle trailing slashes
+  const basePath = import.meta.env.BASE_URL && import.meta.env.BASE_URL !== '/'
+    ? import.meta.env.BASE_URL.replace(/\/$/, '')
+    : '';
+    
+  // Language path
+  let langPath = '';
   if (locale.value === 'es') {
-    path = '/es/';
+    langPath = '/es/';
   } else if (locale.value === 'fr') {
-    path = '/fr/';
+    langPath = '/fr/';
   } else {
-    path = '/';
+    langPath = '/'; 
   }
   
-  return `${baseUrl}${path}`;
+  return `${domain}${basePath}${langPath}`;
 });
 
 // Set up head meta tags for SEO

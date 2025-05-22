@@ -30,6 +30,7 @@ declare global {
     };
     UNDP_JS?: UndpJs;
     jQuery?: any; // Or a more specific jQuery type if you have one
+    __APP_BASE_URL__?: string;
   }
 }
 

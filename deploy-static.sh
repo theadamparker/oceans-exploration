@@ -101,16 +101,20 @@ EOF
 
 # Perform the build based on the selected mode
 if [ "$MODE" = "github" ]; then
-  echo "Building static site for ${DEPLOY_TARGET} with base='/turning-the-tide/'"
-  npm run build:static:github
+  # Try to detect the GitHub repository information
+  GITHUB_USERNAME=$(git config --get remote.origin.url | sed -n 's/.*[:/]\([^/]*\)\/oceans-exploration.*/\1/p' 2>/dev/null || echo "theadamparker")
+  REPO_NAME="turning-the-tide"
+  
+  echo "Building static site for ${DEPLOY_TARGET} with base='/${REPO_NAME}/'"
+  GITHUB_REPO="${GITHUB_USERNAME}/${REPO_NAME}" npm run build:static:github
   
   # Add a .nojekyll file to prevent Jekyll processing
   touch dist/.nojekyll
   
-  generate_env_files "$DEPLOY_TARGET" "/turning-the-tide/"
+  generate_env_files "$DEPLOY_TARGET" "/${REPO_NAME}/"
   
   echo "Static site build for ${DEPLOY_TARGET} completed!"
-  echo "Your site is ready to deploy to https://yourusername.github.io/turning-the-tide/"
+  echo "Your site is ready to deploy to https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/"
   
 elif [ "$MODE" = "cloudflare" ]; then
   echo "Building static site for ${DEPLOY_TARGET} with base='/'"

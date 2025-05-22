@@ -10,7 +10,7 @@
     "dev:fr": "VITE_DEFAULT_LOCALE=fr vite --open /fr/",
     "build": "vue-tsc -b && vite build",
     "build:static": "vue-tsc -b && vite build --config vite.config.ssg.ts --mode ssr && node ./postbuild.js",
-    "build:static:github": "BASE_URL=/turning-the-tide/ vue-tsc -b && vite build --config vite.config.ssg.ts --mode ssr && node ./postbuild.js",
+    "build:static:github": "BASE_URL=/turning-the-tide/ GITHUB_OWNER=theadamparker GITHUB_REPO_NAME=turning-the-tide vue-tsc -b && vite build --config vite.config.ssg.ts --mode ssr && node ./postbuild.js",
     "deploy:static": "./deploy-static.sh",
     "deploy:static:github": "./deploy-static.sh --github",
     "preview": "vite preview",
