@@ -56,9 +56,22 @@ async function processHtmlFiles() {
   const baseUrl = process.env.BASE_URL || '/';
   const isProd = process.env.NODE_ENV === 'production';
   
+  // Determine GitHub organization/username from git config if possible
+  let githubUsername = 'yourusername';
+  try {
+    // Try to get the GitHub username from the remote URL
+    const remoteUrl = execSync('git remote get-url origin').toString().trim();
+    const match = remoteUrl.match(/github\.com[\/:]([^\/]+)\/oceans-exploration/);
+    if (match && match[1]) {
+      githubUsername = match[1];
+    }
+  } catch (err) {
+    console.log('Could not determine GitHub username from git config, using default');
+  }
+  
   // Domain for canonical URLs
   const domain = process.env.BASE_URL === '/turning-the-tide/' 
-    ? 'https://yourusername.github.io/turning-the-tide' 
+    ? `https://${githubUsername}.github.io/turning-the-tide` 
     : 'https://your-production-domain.com';
   
   // Define meta content for each language
@@ -167,9 +180,8 @@ async function processHtmlFiles() {
 
 // Generate sitemap.xml
 function generateSitemap() {
-  const baseUrl = process.env.BASE_URL === '/turning-the-tide/' 
-    ? 'https://yourusername.github.io/turning-the-tide' 
-    : 'https://your-production-domain.com';
+  // Use the same domain variable that we defined earlier to ensure consistency
+  const baseUrl = domain;
   
   const routes = [
     '/', // Default English route
@@ -214,9 +226,8 @@ function generateSitemap() {
 
 // Generate robots.txt if it doesn't exist
 function generateRobotsTxt() {
-  const baseUrl = process.env.BASE_URL === '/turning-the-tide/' 
-    ? 'https://yourusername.github.io/turning-the-tide' 
-    : 'https://your-production-domain.com';
+  // Use the same domain variable that we defined earlier to ensure consistency
+  const baseUrl = domain;
   
   const robotsTxt = `User-agent: *
 Allow: /

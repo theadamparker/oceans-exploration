@@ -30,8 +30,9 @@ const pageDescription = computed(() => {
 });
 
 const canonicalUrl = computed(() => {
+  // Use environment variable BASE_URL to derive the correct base path
   const baseUrl = import.meta.env.PROD 
-    ? 'https://yourusername.github.io/turning-the-tide' 
+    ? `https://${import.meta.env.BASE_URL ? import.meta.env.BASE_URL.substring(1).replace(/\/$/, '') : 'yourusername.github.io/turning-the-tide'}` 
     : 'http://localhost:5173';
   
   let path = '';
