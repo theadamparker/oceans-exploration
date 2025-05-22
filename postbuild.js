@@ -11,6 +11,39 @@ console.log('Running post-build script for static site generation...');
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Base URL for assets and links
+const baseUrl = process.env.BASE_URL || '/';
+const isProd = process.env.NODE_ENV === 'production';
+
+// Determine GitHub organization/username from git config or environment variables
+let githubUsername = 'yourusername';
+try {
+  // First, check if we're in GitHub Actions
+  if (process.env.GITHUB_REPOSITORY) {
+    const repoPath = process.env.GITHUB_REPOSITORY;
+    const orgRepo = repoPath.split('/');
+    if (orgRepo.length === 2) {
+      githubUsername = orgRepo[0];
+      console.log(`Using GitHub username from GITHUB_REPOSITORY: ${githubUsername}`);
+    }
+  } else {
+    // Try to get the GitHub username from the remote URL
+    const remoteUrl = execSync('git remote get-url origin').toString().trim();
+    const match = remoteUrl.match(/github\.com[\/:]([^\/]+)\/oceans-exploration/);
+    if (match && match[1]) {
+      githubUsername = match[1];
+      console.log(`Using GitHub username from git remote: ${githubUsername}`);
+    }
+  }
+} catch (err) {
+  console.log('Could not determine GitHub username, using default');
+}
+
+// Domain for canonical URLs - this will be used throughout the script
+const domain = process.env.BASE_URL === '/turning-the-tide/' 
+  ? `https://${githubUsername}.github.io/turning-the-tide` 
+  : 'https://your-production-domain.com';
+
 // Define paths
 const distPath = path.resolve(__dirname, 'dist');
 const indexPath = path.resolve(distPath, 'index.html');
@@ -52,28 +85,6 @@ async function optimizeHtml(htmlContent) {
 
 // Fix and optimize index.html files
 async function processHtmlFiles() {
-  // Base URL for assets and links
-  const baseUrl = process.env.BASE_URL || '/';
-  const isProd = process.env.NODE_ENV === 'production';
-  
-  // Determine GitHub organization/username from git config if possible
-  let githubUsername = 'yourusername';
-  try {
-    // Try to get the GitHub username from the remote URL
-    const remoteUrl = execSync('git remote get-url origin').toString().trim();
-    const match = remoteUrl.match(/github\.com[\/:]([^\/]+)\/oceans-exploration/);
-    if (match && match[1]) {
-      githubUsername = match[1];
-    }
-  } catch (err) {
-    console.log('Could not determine GitHub username from git config, using default');
-  }
-  
-  // Domain for canonical URLs
-  const domain = process.env.BASE_URL === '/turning-the-tide/' 
-    ? `https://${githubUsername}.github.io/turning-the-tide` 
-    : 'https://your-production-domain.com';
-  
   // Define meta content for each language
   const metaContent = {
     en: {
