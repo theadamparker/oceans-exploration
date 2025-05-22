@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Block access to admin or private areas if needed
+# Disallow: /admin/
+
+# Allow all image files
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.webp$
+
+Sitemap: https://yourusername.github.io/turning-the-tide/sitemap.xml

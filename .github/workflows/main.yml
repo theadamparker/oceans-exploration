@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy Multilingual Site to GitHub Pages
+# Workflow for deploying static site to GitHub Pages with SSG
+name: Deploy Static Site to GitHub Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build for GitHub Pages
-        run: npm run build:github
+        run: npm run build:static:github
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Create .nojekyll file

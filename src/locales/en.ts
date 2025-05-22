@@ -1,4 +1,9 @@
 export default {
+  // Meta information for SEO
+  meta: {
+    title: 'Turning the Tide | Ocean Health & Sustainability | UNDP',
+    description: 'Discover UNDP\'s work on ocean health, sustainability initiatives, and how we\'re turning the tide for marine ecosystems around the world.'
+  },
   // English translations
   common: {
     photo: 'Photo',
@@ -29,7 +34,7 @@ export default {
       figureCaption: 'Like in the Fiji Islands, where coastal communities depend on the sea, the ocean is a lifeline—providing food, income, and cultural identity. Women play a vital role in small-scale fisheries, harvesting marine resources like octopus that sustain both livelihoods and local nutrition.',
       photoCredit: 'UNDP Fiji',
       tourismText: 'Ocean-related tourism grows by an estimated US$134 billion a year and supports a third of the world\'s workers.'
-    },
-    // Add other section translations as needed
+    }
+    // Keep all the existing translations...
   }
 }

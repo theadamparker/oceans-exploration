@@ -29,17 +29,33 @@ This project is set up as a multi-language website with support for:
 
 ## Deployment
 
-The site is configured for deployment to GitHub Pages with the base URL `/turning-the-tide/`.
+The site is built as a static site generator (SSG) for optimal performance and SEO.
 
-### Manual Deployment
+### Static Site Deployment
 
 ```bash
-# Build for GitHub Pages
-npm run build:github
+# Standard static build
+npm run build:static
 
-# Build for development/other environments (base URL = '/')
-npm run build:dev
+# Build with base URL for GitHub Pages
+npm run build:static:github
+
+# Deploy the static site
+npm run deploy:static
+
+# Deploy to GitHub Pages
+npm run deploy:static:github
 ```
+
+### Static Site Preview
+
+To preview the built static site locally:
+
+```bash
+npm run preview:static
+```
+
+For more details on the static site generation, see [README-SSG.md](./README-SSG.md).
 
 ### Automated Deployment
 
@@ -81,21 +97,16 @@ This project uses GitHub Actions for automated deployment:
 ### Building and Testing
 
 ```bash
-# Build all language versions
-npm run build:multilang
+# Build the static site with all language versions
+npm run build:static
 
-# Preview specific language versions
+# Preview specific language versions during development
 npm run preview:en  # English (http://localhost:5173)
 npm run preview:es  # Spanish (http://localhost:5174)
 npm run preview:fr  # French (http://localhost:5175)
-```
 
-## Deployment
-
-To deploy the multilingual site:
-
-```bash
-./deploy-multilingual.sh
+# Preview the complete static site build
+npm run preview:static
 ```
 
 ## Project Structure
