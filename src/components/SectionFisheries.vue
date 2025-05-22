@@ -1,5 +1,8 @@
 <script setup>
 import wavePatternWhite from '../assets/img/pattern-wave-white.png';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 // Make the image URL available to the style section via CSS custom property
 const wavePattern = `url(${wavePatternWhite})`;
@@ -9,7 +12,7 @@ const wavePattern = `url(${wavePatternWhite})`;
   <section>
     <div class="grid-container">
       <div class="grid-x">
-        <p class="small-12 large-8 large-offset-2 h3">Marine fisheries provide 57 million jobs, and in least developed countries fish is the primary source of protein for more than half the population.</p>
+        <p class="small-12 large-8 large-offset-2 h3">{{ t('sections.fisheries.mainText') }}</p>
       </div>
       <div class="grid-x">
         <figure>
@@ -18,28 +21,24 @@ const wavePattern = `url(${wavePatternWhite})`;
           </div>
           <figcaption>
             <p>
-              Like in the Fiji Islands, where coastal communities depend on the sea, the ocean is a lifeline—providing food, income, and cultural identity. Women play a vital role in small-scale fisheries, harvesting marine resources like octopus that sustain both livelihoods and local nutrition.
+              {{ t('sections.fisheries.figureCaption') }}
             </p>
             <div class="credits">
-              <strong>Photo:</strong> UNDP Fiji
+              <strong>{{ t('common.photo') }}:</strong> {{ t('sections.fisheries.photoCredit') }}
             </div>
           </figcaption>
         </figure>
       </div>
       <div class="grid-x">
         <div class="small-12 large-8 large-offset-2">
-          <p>Ocean-related tourism grows by an estimated US$134 billion a year and supports a third of the world’s workers.</p>
-          <p>Yet our oceans are in deep trouble. They are 30 percent more acidic than in pre-industrial times. Ocean heat is at record levels.</p>
-          <p>Drowning in plastic, suffering from destructive overfishing, one of our most precious natural resources could soon be on life support, with devastating consequences.</p>
+          <p>{{ t('sections.fisheries.tourismText') }}</p>
         </div>
       </div>
-    </div>
-    <div class="coralWrap">
-      <img class="left" src="../assets/img/red-coral.webp" alt="">
-      <img class="right" src="../assets/img/algae1.webp" alt="">
+      
     </div>
   </section>
 </template>
+
 <style lang="scss" scoped>
 @use '../assets/scss/breakpoints' as bp;
 

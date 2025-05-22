@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- English HomePage -->
+  <url>
+    <loc>https://yourdomain.com/</loc>
+    <lastmod>2025-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://yourdomain.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://yourdomain.com/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://yourdomain.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yourdomain.com/" />
+  </url>
+  
+  <!-- Spanish HomePage -->
+  <url>
+    <loc>https://yourdomain.com/es/</loc>
+    <lastmod>2025-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://yourdomain.com/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://yourdomain.com/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://yourdomain.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yourdomain.com/en/" />
+  </url>
+  
+  <!-- French HomePage -->
+  <url>
+    <loc>https://yourdomain.com/fr/</loc>
+    <lastmod>2025-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://yourdomain.com/en/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://yourdomain.com/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://yourdomain.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yourdomain.com/en/" />
+  </url>
+
+</urlset>

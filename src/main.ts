@@ -1,7 +1,10 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import { initViewport } from './assets/js/viewport.js'
+import router from './router'
+import i18n from './i18n'
+// Import the UNDP design system utilities with viewport function
+import { initViewport } from './assets/js/undp-design-system.js'
 
 // Import breakpoint debug helper in development mode
 if (import.meta.env.DEV) {
@@ -19,6 +22,10 @@ if (import.meta.env.DEV) {
 // Initialize the app
 const app = createApp(App)
 
+// Use plugins
+app.use(router)
+app.use(i18n)
+
 // Mount the app
 app.mount('#app')
 
@@ -31,4 +38,14 @@ window.addEventListener('DOMContentLoaded', () => {
       threshold: 0.2 // Element is considered in viewport when 20% visible
     });
   }, 100); // Small delay to ensure all Vue components are fully rendered
+});
+
+// Re-initialize viewport detection on route change
+router.afterEach(() => {
+  setTimeout(() => {
+    initViewport({
+      once: false,
+      threshold: 0.2
+    });
+  }, 200); // Slightly longer delay to account for page transition
 });

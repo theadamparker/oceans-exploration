@@ -1,15 +1,71 @@
+<script setup lang="ts">
+import { computed, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRouter, useRoute } from 'vue-router';
+
+// Using global UNDP_JS type defined in vite-env.d.ts
+
+const { t, locale } = useI18n();
+const router = useRouter();
+const route = useRoute();
+
+// Get current language from route or i18n
+const currentLanguage = computed(() => {
+  return locale.value === 'en' ? t('nav.english') : 
+         locale.value === 'es' ? t('nav.spanish') : 
+         t('nav.french');
+});
+
+const languageOptions = computed(() => [
+  { code: 'en', name: t('nav.english') },
+  { code: 'es', name: t('nav.spanish') },
+  { code: 'fr', name: t('nav.french') },
+]);
+
+// Change language handler
+const changeLanguage = (lang: string) => {
+  // Create correct path based on language
+  const path = lang === 'en' ? '/' : `/${lang}`;
+  
+  // If using router navigation
+  if (route.path !== path && typeof router.push === 'function') {
+    router.push(path);
+  } else {
+    // Fallback to direct navigation for static pages or non-router environments
+    const targetPath = lang === 'en' ? '../' : `../${lang}/`; 
+    window.location.href = targetPath;
+  }
+};
+
+// Initialize UNDP language switcher when available
+const initUndpLanguageSwitcher = () => {
+  // Type assertion to help TypeScript understand window.UNDP_JS is available
+  const undpJs = window as any;
+  if (undpJs.UNDP_JS && undpJs.UNDP_JS.languageSwitcher) {
+    setTimeout(() => {
+      undpJs.UNDP_JS.languageSwitcher.init();
+    }, 100);
+  }
+};
+
+// Add onMounted hook to initialize UNDP language switcher
+onMounted(() => {
+  initUndpLanguageSwitcher();
+});
+</script>
+
 <template>
   <header class="country-header">
   <section class="header">
     <div class="grid-container fluid">
       <div class="grid-x grid-margin-x align-content-middle">
         <div class="cell small-8 large-2 shrink align-self-middle top-left">
-          <a href="#" class="logo" tabindex="0" title="UNDP Logo homepage link">
+          <router-link :to="locale === 'en' ? '/' : `/${locale}`" class="logo" tabindex="0" title="UNDP Logo homepage link">
             <img
               src="https://cdn.jsdelivr.net/npm/@undp/design-system/docs/images/undp-logo-white.svg"
               alt="UNDP Logo"
             />
-          </a>
+          </router-link>
         </div>
         <div class="cell small-3 large-auto top-right">
           <div
@@ -18,17 +74,14 @@
           >
             <button
               class="white"
-              aria-label="English, Select your language"
+              :aria-label="`${currentLanguage}, ${t('nav.language')}`"
               aria-expanded="false"
             >
-              English
+              {{ currentLanguage }}
             </button>
             <ul role="menu">
-              <li role="menuitem">
-                <a href="#" lang="fr" hreflang="fr" tabindex="-1">Français</a>
-              </li>
-              <li role="menuitem">
-                <a href="#" lang="es" hreflang="es" tabindex="-1">Español</a>
+              <li role="menuitem" v-for="langOption in languageOptions" :key="langOption.code">
+                <a v-if="locale !== langOption.code" :href="langOption.code === 'en' ? '../' : `../${langOption.code}/`" :lang="langOption.code" :hreflang="langOption.code" tabindex="-1" @click.prevent="changeLanguage(langOption.code)">{{ langOption.name }}</a>
               </li>
             </ul>
           </div>
@@ -37,7 +90,6 @@
     </div>
   </section>
 </header>
-
 </template>
 <style>
 @import url('https://cdn.jsdelivr.net/npm/@undp/design-system/docs/css/components/country-site-header.min.css');

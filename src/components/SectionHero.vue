@@ -1,8 +1,8 @@
 <template>
   <section>
     <div class="titleWrap">
-      <h1 class="title">Turning <br>the tide</h1>
-      <p class="subtitle">Charting the way to a sustainable ocean economy</p>
+      <h1 class="title">{{ t('hero.title') }}</h1>
+      <p class="subtitle">{{ t('hero.subtitle') }}</p>
     </div>
     <div class="sailboat">
       <img src="../assets/img/sailing.webp" alt="">
@@ -10,6 +10,11 @@
     <img src="../assets/img/water-gradient.webp" alt="" class="wave">
   </section>
 </template>
+<script setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+</script>
 <style lang="scss" scoped>
 @use '../assets/scss/breakpoints' as bp;
 section {

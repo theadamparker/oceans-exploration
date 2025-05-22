@@ -9,6 +9,29 @@ declare module '*.vue' {
 
 // Allow importing JS files without type declarations
 declare module '*.js' {
-  const content: any
-  export default content
+  const value: any;
+  export default value;
 }
+
+// Define a global type for UNDP_JS on the window object
+interface UndpJs {
+  languageSwitcher?: {
+    init: () => void;
+  };
+  // Add other UNDP_JS properties as needed
+  [key: string]: any; // Allow for other properties not explicitly defined
+}
+
+// Export everything as global declarations
+declare global {
+  interface Window {
+    UNDP_JS_INIT?: {
+      init: () => void;
+    };
+    UNDP_JS?: UndpJs;
+    jQuery?: any; // Or a more specific jQuery type if you have one
+  }
+}
+
+// Make sure TypeScript exports these global declarations
+export {};

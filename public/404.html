@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting - UNDP Oceans Exploration</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #008DFF;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid white;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    h1 {
+      font-weight: 500;
+    }
+
+    p {
+      margin-top: 0;
+      opacity: 0.8;
+    }
+
+    .languages {
+      margin-top: 20px;
+    }
+
+    a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <span class="loader"></span>
+  <h1>Redirecting to your language</h1>
+  <p>Please wait while we direct you to the appropriate version...</p>
+  <div class="languages">
+    <a href="/en/">English</a> |
+    <a href="/es/">Español</a> |
+    <a href="/fr/">Français</a>
+  </div>
+
+  <script>
+    // Detect user's preferred language
+    function detectLanguage() {
+      const userLang = navigator.language || navigator.userLanguage;
+      const lang = userLang.split('-')[0];
+      
+      // Redirect based on detected language
+      if (lang === 'es') {
+        window.location.href = '/es/';
+      } else if (lang === 'fr') {
+        window.location.href = '/fr/';
+      } else {
+        // Default to English for any other language
+        window.location.href = '/en/';
+      }
+    }
+
+    // Run language detection after a short delay
+    setTimeout(detectLanguage, 800);
+  </script>
+</body>
+</html>
