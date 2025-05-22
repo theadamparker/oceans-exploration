@@ -12,13 +12,47 @@ npm install
 
 # Start development server
 npm run dev
+
+# Or start development server with specific language
+npm run dev:en  # English
+npm run dev:es  # Spanish
+npm run dev:fr  # French
 ```
 
 ## Multilingual Support
 
 This project is set up as a multi-language website with support for:
 
-- English (default): `/en/`
+- English (default): `/`
+- Spanish: `/es/`
+- French: `/fr/`
+
+## Deployment
+
+The site is configured for deployment to GitHub Pages with the base URL `/turning-the-tide/`.
+
+### Manual Deployment
+
+```bash
+# Build for GitHub Pages
+npm run build:github
+
+# Build for development/other environments (base URL = '/')
+npm run build:dev
+```
+
+### Automated Deployment
+
+This project uses GitHub Actions for automated deployment:
+
+1. Any push to the `master` branch triggers a deployment to GitHub Pages
+2. Pull requests trigger a test build to verify everything compiles correctly
+
+#### GitHub Pages Configuration:
+
+- The site is deployed to: `https://yourgithubusername.github.io/turning-the-tide/`
+- The site uses a custom base URL: `/turning-the-tide/`
+- All assets use absolute paths from this base URL
 - Spanish: `/es/`
 - French: `/fr/`
 

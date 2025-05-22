@@ -1,0 +1,32 @@
+# This workflow runs a test build to make sure everything compiles properly
+name: Test Build
+
+on:
+  # Run on pull requests
+  pull_request:
+    branches: ['master']
+  
+  # Run when requested manually
+  workflow_dispatch:
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Test development build
+        run: npm run build:dev
+      
+      - name: Test GitHub Pages build
+        run: npm run build:github

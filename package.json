@@ -10,6 +10,8 @@
     "dev:fr": "VITE_DEFAULT_LOCALE=fr vite --open /fr/",
     "build": "vue-tsc -b && vite build",
     "build:multilang": "vue-tsc -b && vite build --config vite.config.multilang.ts",
+    "build:github": "./deploy.sh --github",
+    "build:dev": "./deploy.sh --dev",
     "preview": "vite preview",
     "preview:all": "concurrently \"npm run preview:en\" \"npm run preview:es\" \"npm run preview:fr\"",
     "preview:en": "vite preview --port 5173",

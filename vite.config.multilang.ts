@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 // This configuration is used to generate language-specific builds
 export default defineConfig({
   plugins: [vue()],
-  base: '/', // Base URL for serving assets - use '/' for absolute URLs
+  base: '/turning-the-tide/', // Base URL for GitHub Pages
   build: {
     outDir: 'dist',
     emptyOutDir: true,

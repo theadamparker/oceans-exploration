@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter, useRoute } from 'vue-router';
 
@@ -22,8 +22,14 @@ const languageOptions = computed(() => [
   { code: 'fr', name: t('nav.french') },
 ]);
 
+// Reference to determine if we're in development
+const isDev = ref(false);
+
 // Change language handler
 const changeLanguage = (lang: string) => {
+  // Get base URL from Vite config
+  const baseUrl = import.meta.env.BASE_URL;
+  
   // Create correct path based on language
   const path = lang === 'en' ? '/' : `/${lang}`;
   
@@ -32,8 +38,19 @@ const changeLanguage = (lang: string) => {
     router.push(path);
   } else {
     // Fallback to direct navigation for static pages or non-router environments
-    const targetPath = lang === 'en' ? '../' : `../${lang}/`; 
+    const targetPath = isDev.value 
+      ? (lang === 'en' ? '/' : `/${lang}/`) 
+      : (baseUrl + (lang === 'en' ? '' : lang + '/'));
     window.location.href = targetPath;
+  }
+};
+
+// Create URLs for language links
+const getLanguageUrl = (langCode: string) => {
+  if (isDev.value) {
+    return langCode === 'en' ? '/' : `/${langCode}/`;
+  } else {
+    return import.meta.env.BASE_URL + (langCode === 'en' ? '' : langCode + '/');
   }
 };
 
@@ -48,9 +65,13 @@ const initUndpLanguageSwitcher = () => {
   }
 };
 
-// Add onMounted hook to initialize UNDP language switcher
+// Add onMounted hook to initialize UNDP language switcher and check environment
 onMounted(() => {
   initUndpLanguageSwitcher();
+  
+  // Check if we're in development
+  const host = (window as any).location.hostname;
+  isDev.value = host === 'localhost' || host === '127.0.0.1';
 });
 </script>
 
@@ -83,7 +104,12 @@ onMounted(() => {
             </button>
             <ul role="menu">
               <li role="menuitem" v-for="langOption in languageOptions" :key="langOption.code">
-                <a v-if="locale !== langOption.code" :href="langOption.code === 'en' ? '../' : `../${langOption.code}/`" :lang="langOption.code" :hreflang="langOption.code" tabindex="-1" @click.prevent="changeLanguage(langOption.code)">{{ langOption.name }}</a>
+                <a v-if="locale !== langOption.code" 
+                   :href="getLanguageUrl(langOption.code)" 
+                   :lang="langOption.code" 
+                   :hreflang="langOption.code" 
+                   tabindex="-1" 
+                   @click.prevent="changeLanguage(langOption.code)">{{ langOption.name }}</a>
               </li>
             </ul>
           </div>
