@@ -62,8 +62,10 @@ onMounted(() => {
         <div class="cell small-8 large-2 shrink align-self-middle top-left">
           <router-link :to="locale === 'en' ? '/' : `/${locale}`" class="logo" tabindex="0" title="UNDP Logo homepage link">
             <img
-              src="https://cdn.jsdelivr.net/npm/@undp/design-system/docs/images/undp-logo-white.svg"
-              alt="UNDP Logo"
+              :src="locale === 'en' 
+                ? 'https://cdn.jsdelivr.net/npm/@undp/design-system/docs/images/undp-logo-white.svg' 
+                : 'https://cdn.jsdelivr.net/npm/@undp/design-system/docs/images/pnud-logo-white.svg'"
+              :alt="locale === 'en' ? 'UNDP Logo' : 'PNUD Logo'"
             />
           </router-link>
         </div>

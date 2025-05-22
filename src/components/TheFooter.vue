@@ -6,12 +6,17 @@
             <div class="cell medium-5">
               <div class="footer-logo inverted">
                 <a href="https://www.undp.org">
-                  <img src="https://cdn.jsdelivr.net/npm/@undp/design-system/docs/images/undp-logo-blue.svg" alt="UNDP Logo" />
+                  <img 
+                    :src="locale === 'en' 
+                      ? 'https://cdn.jsdelivr.net/npm/@undp/design-system/docs/images/undp-logo-blue.svg' 
+                      : 'https://cdn.jsdelivr.net/npm/@undp/design-system/docs/images/pnud-logo-blue.svg'" 
+                    :alt="locale === 'en' ? 'UNDP Logo' : 'PNUD Logo'" 
+                  />
                 </a>
                 <h5 class="" tabindex="0" data-viewport="false">
-                  United Nations
+                  {{ locale === 'en' ? 'United Nations' : locale === 'es' ? 'Naciones Unidas' : 'Nations Unies' }}
                   <br />
-                  Development Programme
+                  {{ locale === 'en' ? 'Development Programme' : locale === 'es' ? 'Programa de Desarrollo' : 'Programme de Développement' }}
                 </h5>
               </div>
             </div>
@@ -29,11 +34,15 @@
           </div>
           <div class="grid-x footer-bottom">
             <div class="cell medium-5">
-              <p tabindex="0">© United Nations Development Programme</p>
+              <p tabindex="0">© {{ locale === 'en' ? 'United Nations Development Programme' : 
+                                 locale === 'es' ? 'Programa de las Naciones Unidas para el Desarrollo' : 
+                                 'Programme des Nations Unies pour le Développement' }}</p>
             </div>
             <div class="cell medium-6">
               <ul class="footer-lists inverted">
-                <li><a href="#">Terms Of Use</a></li>
+                <li><a href="#">{{ locale === 'en' ? 'Terms Of Use' : 
+                                   locale === 'es' ? 'Términos de uso' : 
+                                   'Conditions d\'utilisation' }}</a></li>
               </ul>
               <div class="show-small">
                 <ul class="footer-icons inverted">
@@ -59,7 +68,10 @@
 
 <script setup>
 import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { initUndpComponents } from '../assets/js/undp-design-system.js';
+
+const { locale } = useI18n();
 
 // Initialize UNDP components when the footer mounts
 onMounted(() => {
