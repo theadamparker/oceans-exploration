@@ -124,26 +124,28 @@ async function processHtmlFiles() {
   if (fs.existsSync(indexPath)) {
     let indexContent = fs.readFileSync(indexPath, 'utf8');
     
+    /*
     // Fix asset paths based on whether we're using a base URL
     // For GitHub Pages (or any deployment with base path)
     if (process.env.BASE_URL && process.env.BASE_URL !== '/') {
-      const basePath = process.env.BASE_URL.replace(/^\/|\/$/g, ''); // remove leading/trailing slashes
+      const basePath = process.env.BASE_URL.replace(/^\\/|\\/$/g, ''); // remove leading/trailing slashes
       console.log(`Adjusting asset paths for base URL: ${basePath}`);
       
       // Replace absolute paths with base path
       indexContent = indexContent
-        .replace(/src="\/assets\/([^"]+)"/g, `src="/${basePath}/assets/$1"`)
-        .replace(/href="\/assets\/([^"]+)"/g, `href="/${basePath}/assets/$1"`)
-        .replace(/ src="\//g, ` src="/${basePath}/`) 
-        .replace(/ href="\//g, ` href="/${basePath}/`);
+        .replace(/src="\\/assets\\/([^\\"]+)\\"/g, `src="/${basePath}/assets/$1"`)
+        .replace(/href="\\/assets\\/([^\\"]+)\\"/g, `href="/${basePath}/assets/$1"`)
+        .replace(/ src="\\//g, ` src="/${basePath}/`) 
+        .replace(/ href="\\//g, ` href="/${basePath}/`);
     } else {
       // For development/standard deployment with no base path
       indexContent = indexContent
-        .replace(/src="\/assets\/([^"]+)"/g, 'src="./assets/$1"')
-        .replace(/href="\/assets\/([^"]+)"/g, 'href="./assets/$1"')
-        .replace(/ src="\//g, ' src="./') 
-        .replace(/ href="\//g, ' href="./');
+        .replace(/src="\\/assets\\/([^\\"]+)\\"/g, 'src="./assets/$1"')
+        .replace(/href="\\/assets\\/([^\\"]+)\\"/g, 'href="./assets/$1"')
+        .replace(/ src="\\//g, ' src="./') 
+        .replace(/ href="\\//g, ' href="./');
     }
+    */
 
     // Add SEO meta tags for English
     indexContent = indexContent.replace('</head>', `
